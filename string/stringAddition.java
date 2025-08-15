@@ -11,7 +11,7 @@ public class stringAddition {
         System.out.println(b);
         System.out.println(a+b);
 
-        System.out.println(10+20+" kyo hila dala na!!!! ");
-        System.out.println("kyo hila dala na!!!! "+10+20);        
+        System.out.println(10+20+" kyo hila dala na!!!! ");//30_text_
+        System.out.println("kyo hila dala na!!!! "+10+20);  //_text_1020      
     }
 }
