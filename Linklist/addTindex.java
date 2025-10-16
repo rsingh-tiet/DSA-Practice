@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class addFirst {
+public class addTindex {
     public static class node {
         int data;
         node next;
@@ -27,6 +27,18 @@ public class addFirst {
         }
         int size(){
             return size;
+        }void addLast(int val){
+            node temp = new node();
+            temp.data = val;
+            if(size == 0){
+                head = tail = temp;
+                // size++;
+            }else{
+                tail.next = temp;
+                tail = temp;
+                // size++;
+            }
+            size++;
         }
         void addFirst(int val){
             if(size == 0){
@@ -45,6 +57,30 @@ public class addFirst {
             }
             size++;
             
+        }
+        
+        void addTindex(int pos, int val){
+            node temp = new node();
+            temp.data = val;
+            if(pos>size || pos<0){
+                System.out.println("adding at invalid address");
+            }else if(size ==0){
+                head = tail = temp;
+                size++;
+            }else if(pos == 0){
+                addFirst(val);
+            }else if(pos == size){
+                addLast(val);
+            }
+            else{
+                node curr = head;
+                for (int i = 0; i < pos-1; i++) {
+                    curr = curr.next;
+                }
+                temp.next = curr.next;
+                curr.next = temp;
+                size++;
+            }
         }
         void addList( int val){
             node temp = new node();
@@ -65,19 +101,24 @@ public class addFirst {
     }
 
     public static void main(String[] args) {
+        System.out.println("in this we are adding at any valid index in the list");
         Scanner scn = new Scanner(System.in);
         System.out.println("we are adding at the last of linklist<int> \nenter no of element to be added");
         int a = scn.nextInt();
 
         LinkList ln = new LinkList();
         for (int i = 0; i < a; i++) {
+            System.out.println("enter the element "+(i+1));
             ln.addList(scn.nextInt());
         }
-        
-        
+         
         ln.print();
-        System.out.println("\n enter element to be added at first");
-        ln.addFirst(scn.nextInt());
-        ln.print();
+        System.out.println("\nenter the pos where to be added");
+        int pos = scn.nextInt();
+        System.out.println("enter the element");
+        int val = scn.nextInt();
+
+        ln.addTindex(pos,val);
+        ln.display();
     }
 }

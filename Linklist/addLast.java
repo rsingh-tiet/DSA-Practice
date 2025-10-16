@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class basic {
+public class addLast {
     public static class node {
         int data;
         node next;
@@ -16,7 +16,20 @@ public class basic {
                 System.out.print(curr.data + " -> ");
                 curr = curr.next;
             }
-            System.out.println("null size: "+size);
+            System.out.println("null");
+        }
+        void addLast(int val){
+            node temp = new node();
+            temp.data = val;
+            if(size == 0){
+                head = tail = temp;
+                // size++;
+            }else{
+                tail.next = temp;
+                tail = temp;
+                // size++;
+            }
+            size++;
         }
         void print(){
             for(node temp = head;temp != null;temp = temp.next){
@@ -25,7 +38,7 @@ public class basic {
             // System.out.print(tail.data);
             System.out.print(" null + size: "+size);
         }
-        int size(){
+        public int size(){
             return size;
         }
         void addList( int val){
@@ -48,7 +61,7 @@ public class basic {
 
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
-        System.out.println("enter no of element to be added");
+        System.out.println("we are adding at the last of linklist<int> \nenter no of element to be added");
         int a = scn.nextInt();
 
         LinkList ln = new LinkList();
@@ -57,7 +70,10 @@ public class basic {
             ln.addList(scn.nextInt());
         }
         
-        
+        ln.print();
+        System.out.println();
+        System.out.println("enter element that is added at last");
+        ln.addLast(scn.nextInt());
         ln.print();
     }
 }

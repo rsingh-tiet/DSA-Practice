@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class basic {
+public class removeLast {
     public static class node {
         int data;
         node next;
@@ -23,10 +23,26 @@ public class basic {
                 System.out.print("data: "+temp.data+" ->");
             }
             // System.out.print(tail.data);
-            System.out.print(" null + size: "+size);
+            System.out.print(" null + size:"+size);
         }
         int size(){
             return size;
+        }
+        void removeLast(){
+            if(size == 0){
+                System.out.println("nothinng to remove");
+            }else if(size == 1){
+                head = tail = null;
+                size--;
+            }else{
+                node curr = head;
+                for (int i = 0; i < size-2; i++) {
+                    curr = curr.next;
+                }
+                curr.next = null;
+                tail = curr;
+                size--;
+            }
         }
         void addList( int val){
             node temp = new node();
@@ -48,7 +64,7 @@ public class basic {
 
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
-        System.out.println("enter no of element to be added");
+        System.out.println("we are adding at the last of linklist<int> \nenter no of element to be added");
         int a = scn.nextInt();
 
         LinkList ln = new LinkList();
@@ -59,5 +75,9 @@ public class basic {
         
         
         ln.print();
+        ln.removeLast();
+        System.out.println();
+        ln.print();
+
     }
 }

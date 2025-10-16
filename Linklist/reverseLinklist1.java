@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class basic {
+public class reverseLinklist1 {
     public static class node {
         int data;
         node next;
@@ -28,6 +28,29 @@ public class basic {
         int size(){
             return size;
         }
+        private node getAt(int pos){
+            node temp = head;
+            for(int i = 0 ; i < pos ; i++){
+                temp = temp.next;
+            }
+            return temp;
+        }
+        void reversing(){
+            if(size == 0){
+                System.out.println("nothing to reverse");
+            }else{
+                int li = 0,ri = size-1;
+                while (li<ri) {
+                    node left = getAt(li);
+                    node right = getAt(ri);
+                    int temp = left.data;
+                    left.data = right.data;
+                    right.data = temp;
+                    li++;
+                    ri--;
+                }
+            }
+        }
         void addList( int val){
             node temp = new node();
                 temp.data = val;
@@ -48,7 +71,7 @@ public class basic {
 
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
-        System.out.println("enter no of element to be added");
+        System.out.println("we are reversing the linklist via data changing iteratively O(n^2)\nenter no of elements");
         int a = scn.nextInt();
 
         LinkList ln = new LinkList();
@@ -58,6 +81,9 @@ public class basic {
         }
         
         
+        ln.print();
+        System.out.println();
+        ln.reversing();
         ln.print();
     }
 }

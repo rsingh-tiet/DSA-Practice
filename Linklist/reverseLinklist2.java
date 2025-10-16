@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class basic {
+public class reverseLinklist2 {
     public static class node {
         int data;
         node next;
@@ -17,6 +17,19 @@ public class basic {
                 curr = curr.next;
             }
             System.out.println("null size: "+size);
+        }
+        void reversing(){
+            node prev = null;
+            node curr = head;
+            while (curr!=null) {
+                node next = curr.next;
+                curr.next = prev;
+                prev = curr;
+                curr = next;
+            }
+            node temp = head;
+            head =tail;
+            tail = temp;
         }
         void print(){
             for(node temp = head;temp != null;temp = temp.next){
@@ -48,7 +61,7 @@ public class basic {
 
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
-        System.out.println("enter no of element to be added");
+        System.out.println("In this we r reversing the linklist via pointer swaping\nenter no of element to be added");
         int a = scn.nextInt();
 
         LinkList ln = new LinkList();
@@ -58,6 +71,9 @@ public class basic {
         }
         
         
+        ln.print();
+        System.out.println();
+        ln.reversing();
         ln.print();
     }
 }
