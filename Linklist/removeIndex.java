@@ -115,6 +115,6 @@ public class removeIndex {
         System.out.println("\nenter the pos to be removed");
         ln.removeIndex(scn.nextInt()-1);
         ln.print();
-
+        scn.close();
     }
 }

@@ -81,5 +81,6 @@ public class removeFirst {
         ln.removeFirst();
         System.out.println("\nremove first");
         ln.display();
+        scn.close();
     }
 }

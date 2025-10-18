@@ -120,5 +120,6 @@ public class addTindex {
 
         ln.addTindex(pos,val);
         ln.display();
+        scn.close();
     }
 }

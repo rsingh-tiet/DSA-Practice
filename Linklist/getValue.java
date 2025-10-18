@@ -77,5 +77,6 @@ public class getValue {
         ln.print();
         System.out.println("\nenter the pos which you want to fetch");
         ln.getValue(scn.nextInt());
+        scn.close();
     }
 }

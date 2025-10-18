@@ -75,5 +75,6 @@ public class addLast {
         System.out.println("enter element that is added at last");
         ln.addLast(scn.nextInt());
         ln.print();
+        scn.close();
     }
 }

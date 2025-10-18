@@ -85,5 +85,6 @@ public class reverseLinklist1 {
         System.out.println();
         ln.reversing();
         ln.print();
+        scn.close();
     }
 }

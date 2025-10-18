@@ -78,6 +78,6 @@ public class removeLast {
         ln.removeLast();
         System.out.println();
         ln.print();
-
+        scn.close();
     }
 }

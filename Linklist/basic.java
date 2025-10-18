@@ -95,5 +95,6 @@ public class basic {
         // System.out.println("\nenter the k element from end");
         // ln.getKend(scn.nextInt()-1);
         System.out.println(ln.middle());
+        scn.close();
     }
 }

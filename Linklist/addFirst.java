@@ -79,5 +79,6 @@ public class addFirst {
         System.out.println("\n enter element to be added at first");
         ln.addFirst(scn.nextInt());
         ln.print();
+        scn.close();
     }
 }
