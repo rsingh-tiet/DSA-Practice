@@ -18,6 +18,40 @@ public class basic {
             }
             System.out.println("null size: "+size);
         }
+        int middle(){
+            if(size == 0){
+                System.out.println("empty list");
+                return -1;
+            }else if(size == 1){
+                System.out.println("one element is present defining middle is now irrelevent");
+                return head.data;
+            }else{
+                node i = head,j = head;
+                // here 2 pointer approach from the last and start to id will not work if size is not allowed to use
+                while(j != tail && j.next.next!=null){
+                    i = i.next;
+                    j = j.next.next;
+                }
+                return i.data;
+            }
+        }
+        void getKend(int k){
+            if(size == 0){
+                System.out.println("empty list");
+            }else if(size == 1){
+                System.err.println("only 1 element");
+            }else{
+                node i = head,j = head;
+                for (int idx = 0; idx < k; idx++) {
+                 j = j.next;
+                }
+                while(j.next!=null){
+                    i = i.next;
+                    j = j.next;
+                }
+                System.out.println("Kth from end is "+i.data);
+            }
+            }
         void print(){
             for(node temp = head;temp != null;temp = temp.next){
                 System.out.print("data: "+temp.data+" ->");
@@ -56,8 +90,10 @@ public class basic {
             System.out.println("enter the element "+(i+1));
             ln.addList(scn.nextInt());
         }
-        
-        
+          
         ln.print();
+        // System.out.println("\nenter the k element from end");
+        // ln.getKend(scn.nextInt()-1);
+        System.out.println(ln.middle());
     }
 }
