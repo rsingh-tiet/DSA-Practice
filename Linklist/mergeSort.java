@@ -28,6 +28,17 @@ public class mergeSort {
         int size(){
             return size;
         }
+        void addLast(int val){
+            node temp = new node();
+            temp.data = val;
+            if(size == 0){
+                head = tail = temp;
+            }else{
+                tail.next = temp;
+                tail = temp;
+            }
+                size++;
+        }
         void addList( int val){
             node temp = new node();
                 temp.data = val;
@@ -45,6 +56,56 @@ public class mergeSort {
             size++;
         }
     }
+    
+    public static node midnode(node head, node tail) {
+    node slow = head;
+    node fast = head;
+
+    while (fast != tail && fast.next != tail) {
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+    return slow;
+}
+
+    public static LinkList merge2List(LinkList l1, LinkList l2){
+        LinkList merged = new LinkList();
+        node f = l1.head;
+        node s = l2.head;
+        while(f != null && s != null){
+            if(f.data > s.data){
+                merged.addLast(s.data);
+                s = s.next;
+            }else{
+                merged.addLast(f.data);
+                f= f.next;
+            }
+        }
+        while(f != null){
+            merged.addLast(f.data);
+            f = f.next;
+        }
+        while(s != null){
+            merged.addLast(s.data);
+            s = s.next;
+        }
+
+        return merged;
+    }
+    public static LinkList mergeSort(node head,node tail){
+        
+        if(head == tail){
+            LinkList l = new LinkList();
+            l.addLast(head.data);
+            return l;
+        }
+        
+        node mid  = midnode(head, tail);
+        LinkList first =  mergeSort(head, mid);
+        LinkList second = mergeSort(mid.next, tail); 
+        LinkList merged = merge2List(first, second);
+        return merged;
+    }
 
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
@@ -57,8 +118,10 @@ public class mergeSort {
             ln.addList(scn.nextInt());
         }
         
-        
         ln.print();
+        System.out.println("\nsorted list is");
+        LinkList l = mergeSort(ln.head, ln.tail);
+        l.print();
         scn.close();
     }
 }
