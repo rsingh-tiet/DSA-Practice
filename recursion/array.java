@@ -54,6 +54,21 @@ public class array {
         }
         all(arr, i+1, d);
     }
+    public static int[] allIndex(int arr[] ,int i, int d, int fcf){
+        if(i == arr.length) {
+            int res[] = new int[fcf];
+            return res;
+        }
+        if(arr[i] == d){
+            int ia[] = allIndex(arr, i+1, d, fcf+1);
+            ia[fcf] = i;
+            return ia;
+        }else{
+            int ia[] = allIndex(arr, i+1, d, fcf);
+            return ia;
+        }
+        
+    }
     public static int last(int arr[],int i,int d){
         if( i == arr.length) return -1;
         int liza = last(arr, i+1, d);
@@ -86,5 +101,9 @@ public class array {
         // System.out.println(first2(arr, 0, d));
         // System.out.println(last(arr, 0, d));
         all(arr, 0, d);
+        int ans[] = allIndex(arr, 0, d, 0);
+        for (int i : ans) {
+            System.out.println(i);
+        }
     }
 }
