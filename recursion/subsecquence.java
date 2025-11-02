@@ -2,6 +2,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class subsecquence {
+    public static void printSubSecquence(String s,String ans){
+        if(s.isEmpty()){
+            System.out.println(ans);
+            return;
+        }
+        char ch = s.charAt(0);
+        String rest = s.substring(1);
+        printSubSecquence(rest, ans+ch);
+        printSubSecquence(rest, ans+"");
+        
+    }
 
     public static ArrayList subSecquence(String s){
         if(s.isEmpty()){
@@ -29,5 +40,6 @@ public class subsecquence {
         s = scn.next();
         ArrayList<String> result = subSecquence(s);
         System.out.println(result);
+        printSubSecquence(s, "");
     }
 }

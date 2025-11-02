@@ -21,6 +21,11 @@ public class keyboardComb {
         "wxyz",  // 8
         "/*+-" //9
     };
+    public static void printSubSecquence(String s, String ans){
+        char ch = s.charAt(0);
+        String rest = s.substring(1);
+        
+    }
     public static ArrayList<String> keyComb(String s){
         if(s.isEmpty()){
             ArrayList<String> intAns = new ArrayList<>();
