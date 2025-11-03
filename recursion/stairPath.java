@@ -31,13 +31,25 @@ public class stairPath {
         }
         return ans;
     }
+    public static void printStairPath(int s,String ans){
+        if(s == 0){
+            System.out.println(ans);
+            return;
+        }
+        if(s<0){
+            return;
+        }
+        printStairPath(s-1, ans+"1");
+        printStairPath(s-2, ans+"2");
+        printStairPath(s-3, ans+"3");
+    }
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
         System.out.println("enter floors");
         int s = scn.nextInt();
-            ArrayList<String> res = path(s, 0);
-            System.out.println(res);
-           
-        
+        ArrayList<String> res = path(s, 0);
+        System.out.println(res);
+        printStairPath(s, "");   
+        scn.close();
     }
 }

@@ -17,6 +17,6 @@ public class hanoiTower {
         char c = scn.next().charAt(0);
 
         hanoi(n, a, b, c);
-
+        scn.close();
     }
 }

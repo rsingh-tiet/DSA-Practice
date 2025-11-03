@@ -110,6 +110,6 @@ public class basics {
             arr[i] = scn.nextInt();
         }
         display(arr, 0);
-
+        scn.close();
     }
 }

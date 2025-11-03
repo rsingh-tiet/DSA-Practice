@@ -8,6 +8,8 @@ public class keyboardComb {
         String s = scn.next();
         ArrayList<String> res = keyComb(s);
         System.out.println(res);
+        printKeyboardComb(s, "");
+        scn.close();
     }
     static String[] keypad = {
         ".",    // 0    
@@ -21,10 +23,20 @@ public class keyboardComb {
         "wxyz",  // 8
         "/*+-" //9
     };
-    public static void printSubSecquence(String s, String ans){
+    public static void printKeyboardComb(String s, String ans){
+        if(s.isEmpty()){
+            System.out.println(ans);
+            return;
+        }
         char ch = s.charAt(0);
         String rest = s.substring(1);
-        
+        String key = keypad[ch-'0'];
+        int length = key.length();
+        for (int i = 0; i < length; i++) {
+            char currOption = key.charAt(i);
+            printKeyboardComb(rest, ans+currOption); 
+
+        }
     }
     public static ArrayList<String> keyComb(String s){
         if(s.isEmpty()){

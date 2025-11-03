@@ -40,6 +40,19 @@ public class mazePath {
         
         return ans;
     }
+    public static void printMazePath(int r,int c,int row,int col,String ans){
+        if(r == row && c == col){
+            System.out.println(ans);
+            return;
+        }
+        if(r<row){
+            printMazePath(r+1, c, row, col, ans+"V");
+        }if(c<col){
+            printMazePath(r, c+1, row, col, ans+"H");
+        }if(r<row && c<col){
+            printMazePath(r+1, c+1, row, col, ans+"D");
+        }
+    }
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
         System.out.println("enter maze dimen row x col");
@@ -47,5 +60,7 @@ public class mazePath {
         int col = scn.nextInt();
         ArrayList<String> res = path(1,1,row, col);
         System.out.println(res);
+        printMazePath(1, 1, row, col, "");
+        scn.close();
     }
 }

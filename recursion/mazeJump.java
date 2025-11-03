@@ -36,6 +36,26 @@ public class mazeJump {
         }
         return ans;
     }
+    public static void printMazeJumo(int r,int c,int row,int col,String ans){
+        if(r == row && c == col){
+            System.out.println(ans);
+            return;
+        }
+        // if(r>row || c>col){
+        //     return;
+        // }
+        
+            for (int hjump = 1; hjump <= col-c; hjump++) {//starts from 1 as zero will put it in infinite loop
+                printMazeJumo(r, c+hjump, row, col, ans+"H"+hjump);
+            }
+        
+            for (int vjump = 1; vjump <= row-r; vjump++) {
+                printMazeJumo(r+vjump, c, row, col, ans+"V"+vjump);
+            }
+            for (int hjump = 1,vjump =1; vjump<=row-r && hjump<= col-c ; hjump++,vjump++) {
+                printMazeJumo(r+vjump, c+hjump, row, col, ans+"D"+hjump);
+            }
+    }
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
         System.out.println("enter maze dimen row x col");
@@ -43,7 +63,8 @@ public class mazeJump {
         int col = scn.nextInt();
         ArrayList<String> res = path(1,1,row, col);
         System.out.println(res);
-    
+        printMazeJumo(1, 1, row, col, "");
+        scn.close();
     }
 }
 

@@ -5,7 +5,7 @@ public class fibonaci {
         Scanner scn = new Scanner(System.in);
         int a = (int)Math.pow(2, 12);
         System.out.println(a);
-
+        scn.close();
 
     }
 }

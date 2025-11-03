@@ -41,5 +41,6 @@ public class subsecquence {
         ArrayList<String> result = subSecquence(s);
         System.out.println(result);
         printSubSecquence(s, "");
+        scn.close();
     }
 }

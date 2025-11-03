@@ -6,6 +6,76 @@
     "configurations": [
         {
             "type": "java",
+            "name": "KnightTour",
+            "request": "launch",
+            "mainClass": "KnightTour",
+            "projectName": "recursion_849ce94c"
+        },
+        {
+            "type": "java",
+            "name": "queen",
+            "request": "launch",
+            "mainClass": "queen",
+            "projectName": "recursion_849ce94c"
+        },
+        {
+            "type": "java",
+            "name": "subset",
+            "request": "launch",
+            "mainClass": "subset",
+            "projectName": "recursion_849ce94c"
+        },
+        {
+            "type": "java",
+            "name": "floodfill",
+            "request": "launch",
+            "mainClass": "floodfill",
+            "projectName": "recursion_849ce94c"
+        },
+        {
+            "type": "java",
+            "name": "encoding",
+            "request": "launch",
+            "mainClass": "encoding",
+            "projectName": "recursion_849ce94c"
+        },
+        {
+            "type": "java",
+            "name": "permutation",
+            "request": "launch",
+            "mainClass": "permutation",
+            "projectName": "recursion_849ce94c"
+        },
+        {
+            "type": "java",
+            "name": "mazeJump",
+            "request": "launch",
+            "mainClass": "mazeJump",
+            "projectName": "recursion_849ce94c"
+        },
+        {
+            "type": "java",
+            "name": "mazePath",
+            "request": "launch",
+            "mainClass": "mazePath",
+            "projectName": "recursion_849ce94c"
+        },
+        {
+            "type": "java",
+            "name": "stairPath",
+            "request": "launch",
+            "mainClass": "stairPath",
+            "projectName": "recursion_849ce94c"
+        },
+        {
+            "type": "java",
+            "name": "keyboardComb",
+            "request": "launch",
+            "mainClass": "keyboardComb",
+            "projectName": "recursion_849ce94c"
+        },
+        {
+            "type": "java",
             "name": "subsecquence",
             "request": "launch",
             "mainClass": "subsecquence",

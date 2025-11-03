@@ -105,5 +105,6 @@ public class array {
         for (int i : ans) {
             System.out.println(i);
         }
+        scn.close();
     }
 }
