@@ -11,7 +11,7 @@ public class KnightTour {
     }
     public static void tour(int[][] arr,boolean[][] visited,int row,int col,String ans,int move){
         if(row<0 || col <0 || row >=arr.length || col  >= arr.length || arr[row][col]>0){
-            display(arr);
+            // display(arr);
             return;
             
         }
@@ -24,14 +24,14 @@ public class KnightTour {
         }
         arr[row][col] =1;
         visited[row][col] = true;
-        tour(arr, visited, row-2, col+1, ans+" "+row+col+" ",move+1);
-        tour(arr, visited, row-1, col+2, ans+" "+row+col+" ",move+1);
-        tour(arr, visited, row+1, col+2, ans+" "+row+col+" ",move+1);
-        tour(arr, visited, row+2, col+1, ans+" "+row+col+" ",move+1);
-        tour(arr, visited, row+2, col-1, ans+" "+row+col+" ",move+1);
-        tour(arr, visited, row+1, col-2, ans+" "+row+col+" ",move+1);
-        tour(arr, visited, row-1, col-2, ans+" "+row+col+" ",move+1);
-        tour(arr, visited, row-2, col+1, ans+" "+row+col+" ",move+1);
+        tour(arr, visited, row-2, col+1, ans+" "+row+col+"->",move+1);
+        tour(arr, visited, row-1, col+2, ans+" "+row+col+"->",move+1);
+        tour(arr, visited, row+1, col+2, ans+" "+row+col+"->",move+1);
+        tour(arr, visited, row+2, col+1, ans+" "+row+col+"->",move+1);
+        tour(arr, visited, row+2, col-1, ans+" "+row+col+"->",move+1);
+        tour(arr, visited, row+1, col-2, ans+" "+row+col+"->",move+1);
+        tour(arr, visited, row-1, col-2, ans+" "+row+col+"->",move+1);
+        tour(arr, visited, row-2, col+1, ans+" "+row+col+"->",move+1);
         visited[row][col] = false;
         arr[row][col] =0;
     }
