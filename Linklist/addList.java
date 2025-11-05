@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class basic {
+public class addList {
     public static class node {
         int data;
         node next;
@@ -62,97 +62,46 @@ public class basic {
         int size(){
             return size;
         }
-        void helperDis(node n){
-            if(n == null){
-                return;
+        int helperAdd(node one,node two,int pv1,int pv2,LinkList ans){
+            if(pv1 ==0 && pv2 ==0){
+                return 0;
             }
-            helperDis(n.next);
-            System.out.print(n.data+" ");
-        }
-        void displayRecurRev(){
-            helperDis(head);
-            
-        }
-        node left;
-        void helperRev(node n,int ctrl){
-            if(n == null){
-                return;
-            }
-            helperRev(n.next, ctrl+1);
-            if(ctrl>size/2){
-                
-                int temp = left.data;
-                left.data = n.data;
-                n.data= temp;
-                left = left.next;
-            }
-        }
-        void revRec(){
-            left = head;
-            helRev(head);
-            head.next = null;
-            node temp = head;
-            head = tail;
-            tail = temp;
-        }
-        void helRev(node right){
-            if(right == null){
-                return;
-            }
-            helRev(right.next);
-            if(right == tail){
+            int data =0;
+            if(pv1>pv2){
+                int carry = helperAdd(one.next, two, pv1-1, pv2, ans);
+                data = carry+one.data;
 
+            }else if(pv1<pv2){
+                int carry = helperAdd(one, two.next, pv1, pv2-1, ans);
+                data = carry + two.data;
             }else{
-                right.next.next = right; 
+                int carry = helperAdd(one.next, two.next, pv1-1, pv2-1, ans);
+                data = carry+ one.data+two.data;
             }
-        }
-        void reverseRec(){
-            left = head;//i cannot crete node left here not in  scope and can't initialize it there as head is formed after linklist is created
-            helperRev(head,0);
-        }
-        boolean helperPal(node right,int floor){
-            if(right == null){
-                // flag = true;
-                return true;
-            }
-            boolean intermediate = helperPal(right.next, floor+1);
-            if(floor>size/2){
-                if(left.data == right.data && intermediate == true ){
-                    left = left.next;
-                    return true;
-                }else{
-                    // System.out.println("not palindrome");
-                    // flag = false;
-                    return false;
-                }
-            }
-            return intermediate;
-        }
-        void isPalindrome(){
-            left =head;
-            boolean ans = helperPal(head,0);
-            System.out.println(ans);
-        }
-        void helperFold(node right, int floor) {
-            if (right == null) return;
+            int carry = data/10;
+            data = data%10;
+            ans.addFirst(data);
 
-            helperFold(right.next, floor + 1);
-
-            if (floor > size / 2) {
-                node temp = left.next;
-                left.next = right;
-                right.next = temp;
-                left = temp;
-            } else if (floor == size / 2) {
-                // middle reached, break chain
-                tail = right;
-                tail.next = null;
-            }
+            return carry;
         }
-
-        void foldList() {
-            left = head;
-            helperFold(head, 0);
+        LinkList addTwoList(LinkList one,LinkList two){
+            LinkList ans = new LinkList();
+            int carry = helperAdd(one.head,two.head,one.size,two.size,ans);
+            if(carry>0){
+                ans.addFirst(carry);
+            }
+            return ans;
+        }
+        void addFirst(int val){
+            node temp = new node();
+            temp.data = val;
+            if(size == 0){
+                head = tail = temp;
+            }else{
+                temp.next = head;
+                head = temp;
+            }
+            size++;
         }
         void addList( int val){
             node temp = new node();
@@ -177,26 +126,29 @@ public class basic {
         System.out.println("enter no of element to be added");
         int a = scn.nextInt();
 
-        LinkList ln = new LinkList();
+        LinkList ln1 = new LinkList();
         for (int i = 0; i < a; i++) {
             System.out.println("enter the element "+(i+1));
-            ln.addList(scn.nextInt());
+            ln1.addList(scn.nextInt());
         }
           
-        ln.print();
+        LinkList ln2 = new LinkList();
+        System.out.println("enter the size of ln2");
+        int b = scn.nextInt();
+        for (int i = 0; i < b; i++) {
+            System.out.println("enter the element "+(i+1));
+            ln2.addList(scn.nextInt());
+        }
+
+        ln1.print();
         System.out.println();
+        ln2.print();
+        System.out.println();
+        LinkList ans = ln1.addTwoList(ln1, ln2);
+        ans.print();
         // System.out.println("\nenter the k element from end");
         // ln.getKend(scn.nextInt()-1);
         // System.out.println(ln.middle());
-        ln.displayRecurRev();
-        ln.reverseRec();
-        ln.print();
-        ln.revRec();
-        ln.display();
-        System.out.println("is list a palindrome");
-        ln.isPalindrome();
-        ln.foldList();
-        ln.display();
         scn.close();
     }
 }

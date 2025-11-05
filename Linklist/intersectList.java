@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class kReverse {
+public class intersectList {
     public static class node {
         int data;
         node next;
@@ -62,6 +62,25 @@ public class kReverse {
         int size(){
             return size;
         }
+        int intersectPoint(LinkList one,LinkList two){
+            int delta = Math.abs(one.size-two.size);
+            node o1 = one.head;
+            node o2 = two.head;
+            if(one.size>two.size){
+                for (int i = 0; i < delta; i++) {
+                    o1 = o1.next;
+                }
+            }else{
+                for (int i = 0; i < delta; i++) {
+                    o2 = o2.next;
+                }
+            }
+            while(o1 != o2){
+                o1 = o1.next;
+                o2 = o2.next;
+            }
+            return o1.data;
+        }
         void addList( int val){
             node temp = new node();
                 temp.data = val;
@@ -78,61 +97,8 @@ public class kReverse {
             }
             size++;
         }
-        void removeFirst(){
-            if(size == 0){
-                System.out.println("nothing to remove");
-            }else if(size == 1){
-                head = tail = null;
-                size = 0;
-            }else{
-                head = head.next;
-                size--;
-            }
-        }
-        void addFirst(int val){
-            node temp = new node();
-            temp.data = val;
-            if(size == 0){
-                head = tail = temp;
-            }else{
-                temp.next = head;
-                head = temp;
-            }
-            size++;
-        }
-        public void KReverse(int k){ // TIME COMPLEXITY IS O(N) NOT N2 AS WHILE RUNS N/K TIMES AND FOR RUNS K TIMES
-            
-            LinkList prev = null;
-            while (this.size>0) {
-                LinkList curr = new LinkList();
-                if(this.size >=k){
-                  for(int i =0; i<k;i++){
-                        curr.addFirst(this.head.data);
-                        this.removeFirst();
-                    }  
-                }else{
-                    int redsize = this.size;
-                    for (int i = 0; i < redsize; i++) {
-                        curr.addList(this.head.data);
-                        this.removeFirst();
-                    }
-                }
-
-                
-                if(prev == null){
-                    prev = curr;
-                }else{
-                    prev.tail.next = curr.head;
-                    prev.tail = curr.tail;
-                    prev.size+=curr.size;
-                }
-            }
-            this.head = prev.head;
-            this.tail = prev.tail;
-            this.size = prev.size;
-            
-        }
     }
+
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
         System.out.println("enter no of element to be added");
@@ -143,15 +109,26 @@ public class kReverse {
             System.out.println("enter the element "+(i+1));
             ln.addList(scn.nextInt());
         }
-          
+        System.out.println("enter initial size of ln2");
+        int b = scn.nextInt();
+        LinkList ln2 = new LinkList();
+        for (int i = 0; i <b; i++) {
+            System.out.println("enter the element "+(i+1));
+            ln2.addList(scn.nextInt());
+        }
+        node temp = ln.head;
+        for (int i = 0; i < ln.size-1; i++) {
+            temp = temp.next;
+        }
+        temp.next = ln2.head;
+        ln.size+=ln2.size;
+
         ln.print();
         System.out.println();
-        // System.out.println("\nenter the k element from end");
-        // ln.getKend(scn.nextInt()-1);
-        // System.out.println(ln.middle());
-        System.out.println("enter the k for reversing");
-        ln.KReverse(scn.nextInt());
-        ln.print();
+        ln2.print();
+        System.out.println();
+        int ans = ln.intersectPoint(ln, ln2);
+        System.out.println(ans);
         scn.close();
     }
 }
