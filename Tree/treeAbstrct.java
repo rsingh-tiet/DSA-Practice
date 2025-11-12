@@ -37,6 +37,24 @@ public class treeAbstrct {
     static int ceil,floor;
     static Node maxNode;
     static int maxSum;
+    static int diameter;
+
+    public static int diameterReturnHt(Node n){
+        int deepChild = -1;
+        int secondDeepChild = -1;
+        for (Node chilNode : n.children) {
+            int currHt = diameterReturnHt(chilNode);
+            if(currHt>deepChild){
+                deepChild = currHt;
+                secondDeepChild = deepChild;
+            }else if(currHt>secondDeepChild){
+                secondDeepChild = currHt;
+            }
+        }
+        diameter = Math.max(diameter, secondDeepChild+deepChild+2);
+        deepChild++;
+        return deepChild;
+    }
 
     public static int maxSubSum(Node n){
         int sum = 0;
@@ -140,13 +158,19 @@ public class treeAbstrct {
         Node root1 = construct(arr1);
         Node root2 = construct(arr2);
         display(root1);
-        presuu(root2,40);
-        System.out.println(predecessor.data);
-        System.out.println(sucessor.data);
-        ceil = Integer.MAX_VALUE;
-        floor = Integer.MIN_VALUE;
+        // presuu(root2,40);
+        // System.out.println(predecessor.data);
+        // System.out.println(sucessor.data);
+        // ceil = Integer.MAX_VALUE;
+        // floor = Integer.MIN_VALUE;
 
-        maxNode = null;
-        maxSum = Integer.MIN_VALUE;
+        // maxNode = null;
+        // maxSum = Integer.MIN_VALUE;
+        // maxSubSum(root2);
+        // System.out.println(maxSum+"@"+maxNode.data);
+
+        diameter = 0;
+        diameterReturnHt(root2);
+        System.out.println("diameter "+diameter);
     }
 }

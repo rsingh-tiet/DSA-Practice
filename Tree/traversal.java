@@ -24,6 +24,34 @@ public class traversal {
             display(child);
         }
     }
+    // ITERATIVE TRAVERSAL
+    public static class pair{
+        node node;
+        int state;
+    }
+    static void iterativeTraversal(node node){
+        Stack<pair> stk = new Stack<>();
+        pair p = new pair();
+        p.node = node;
+        p.state = -1;
+        stk.push(p);
+        while(!stk.isEmpty()){
+            if(stk.peek().state  == -1){
+                System.out.println("pre :"+stk.peek().node.data);
+                stk.peek().state++;
+            }else if(stk.peek().state>=0 && stk.peek().state <stk.peek().node.children.size()-1){
+                int newState = stk.peek().state;
+                stk.peek().state++;
+                pair child = new pair();
+                child.node = stk.peek().node.children.get(newState);
+                child.state = -1;
+                stk.push(child);
+            }else{
+                System.out.println("post:"+stk.peek().node.data);
+                stk.pop();
+            }
+        }
+    }
     static void traversal(node node){
         System.out.println("node pre-> " + node.data);
         for (node child : node.children) {

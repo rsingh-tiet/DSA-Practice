@@ -29,7 +29,7 @@ public class AreTreesSimilar {
         }
         return root;
     }
-
+    
     // Function to check if two trees are structurally similar
     public static boolean areSimilar(Node n1, Node n2) {
         if (n1.children.size() != n2.children.size()) {
