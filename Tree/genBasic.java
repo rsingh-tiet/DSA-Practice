@@ -1,3 +1,12 @@
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+// ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░   ░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░
+// ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒  ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒   ▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒▒
+// ▒▒     ▒▒▒▒▒▒   ▒▒▒▒▒   ▒   ▒▒▒▒▒▒   ▒▒▒▒▒  ▒    ▒▒▒▒▒▒▒▒    ▒▒▒▒▒▒▒    ▒  ▒  ▒    ▒▒▒▒   ▒▒▒▒▒▒▒▒   ▒▒▒▒
+// ▓   ▓▓   ▓▓  ▓▓▓   ▓▓▓   ▓▓   ▓▓  ▓▓▓   ▓▓▓   ▓▓▓▓   ▓▓   ▓▓▓▓▓▓▓▓▓▓▓▓   ▓▓▓▓   ▓▓▓▓▓  ▓▓▓   ▓▓▓  ▓▓▓   ▓
+// ▓  ▓▓▓   ▓         ▓▓▓   ▓▓   ▓         ▓▓▓   ▓▓▓▓   ▓   ▓▓▓▓▓▓▓▓▓▓▓▓▓   ▓▓▓▓   ▓▓▓▓         ▓▓         ▓
+// ▓    ▓   ▓  ▓▓▓▓▓▓▓▓▓▓   ▓▓   ▓  ▓▓▓▓▓▓▓▓▓▓   ▓▓▓▓   ▓▓   ▓▓▓▓▓▓▓▓▓▓▓▓   ▓ ▓▓   ▓▓▓▓  ▓▓▓▓▓▓▓▓▓  ▓▓▓▓▓▓▓▓
+// █████   ████     ████    ██   ███     ████    ████   ████    ██████████   ██    ██████     ██████     ███
+// ███    ██████████████████████████████████████████████████████████████████████████████████████████████████
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -103,6 +112,64 @@ public class genBasic {
         return new String();
     }
     
+    public static ArrayList<node> rootpath(node node ,int d){
+        if (node.data == d) {
+            ArrayList<node> arr = new ArrayList<>();
+            arr.add(node);
+        }
+        for (node child : node.children) {
+            ArrayList<node> curr = rootpath(child, d);
+            if(curr.size()>0){
+                curr.add(child);
+            }
+        }
+        return new ArrayList<>();
+    }
+public static int distanceBtw(node root, int d1, int d2) {
+    ArrayList<Integer> path1 = nodeToRootPath(root, d1);
+    ArrayList<Integer> path2 = nodeToRootPath(root, d2);
+
+    int i = path1.size() - 1;
+    int j = path2.size() - 1;
+
+    // Move from root side until paths diverge
+    while (i >= 0 && j >= 0 && path1.get(i).equals(path2.get(j))) {
+        i--;
+        j--;
+    }
+    i++;
+    j++;
+
+    // distance = nodes after LCA in both paths
+    int distance = i + j;
+    return distance;
+}
+
+    public static ArrayList<Integer> nodeToRootPath(node node, int data) {
+    if (node.data == data) {
+        ArrayList<Integer> path = new ArrayList<>();
+        path.add(node.data);
+        return path;
+    }
+    for (node child : node.children) {
+        ArrayList<Integer> childPath = nodeToRootPath(child, data);
+        if (childPath.size() > 0) {
+            childPath.add(node.data);
+            return childPath;
+        }
+    }
+    return new ArrayList<>();
+}
+    public static int lca(node root, node n1,node n2){
+        ArrayList<node> arr1 = rootpath(root,n1.data);
+        ArrayList<node> arr2 = rootpath(root, n2.data);
+        int i = arr1.size()-1,j = arr2.size()-1;
+        while((i>=0 &&j>=0)&& arr1.get(i).data == arr2.get(j).data){
+            i--;j--;
+        }
+        i++;j++;
+        return arr1.get(i).data;
+    }
     private static node gettail(node node){
         while(node.children.size()==1){
             node = node.children.get(0);
@@ -142,25 +209,7 @@ public class genBasic {
     //         11, -1,     // child of 10 → longest path
     //         -1, -1      // closing remaining
     //     };
-        // int[] arr = {
-        //     1,
-        //     2, -1,
-        //     3, 
-        //         6, -1,
-        //     -1,
-        //     4,
-        //         7,
-        //             9,
-        //             10,
-        //                 11, -1,
-        //             -1,
-        //             -1,
-        //         -1,
-        //         8, -1,
-        //     -1,
-        //     -1
-        // };
-
+        
         // int[] arr = {10,20,-1,-1};
         Stack<node> stk = new Stack<>();
         for (int i = 0; i < arr.length; i++) {
@@ -181,19 +230,23 @@ public class genBasic {
         int size = size(root);
         System.out.println(size);
         int maxTree = max(root);
-        System.out.println(maxTree);
+        System.out.println("max : "+maxTree);
         int min = min(root);
-        System.out.println(min);
+        System.out.println("min :"+min);
         int ht = height(root);
-        System.out.println(ht);
+        System.out.println("ht :"+ht);
         // mirror(root);
         // display(root);
         // removeLeaf(root);
         // linearTree(root);
         // display(root);
-        boolean ans = hasElement(root, 120);
-        System.out.println(ans);
-        String ans1 = path(root, 120);
-        System.out.println(ans1);
+        // boolean ans = hasElement(root, 120);
+        // System.out.println(ans);
+        // String ans1 = path(root, 120);
+        // System.out.println(ans1);
+        int distance = distanceBtw(root, 100, maxTree);
+        System.out.println(distance);
+
+        
     }
 }
