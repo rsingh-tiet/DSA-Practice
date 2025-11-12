@@ -25,13 +25,13 @@ public class traversal {
         }
     }
     // ITERATIVE TRAVERSAL
-    public static class pair{
+    public static class Ppair{
         node node;
         int state;
     }
     static void iterativeTraversal(node node){
-        Stack<pair> stk = new Stack<>();
-        pair p = new pair();
+        Stack<Ppair> stk = new Stack<>();
+        Ppair p = new Ppair();
         p.node = node;
         p.state = -1;
         stk.push(p);
@@ -42,7 +42,7 @@ public class traversal {
             }else if(stk.peek().state>=0 && stk.peek().state <stk.peek().node.children.size()-1){
                 int newState = stk.peek().state;
                 stk.peek().state++;
-                pair child = new pair();
+                Ppair child = new Ppair();
                 child.node = stk.peek().node.children.get(newState);
                 child.state = -1;
                 stk.push(child);
