@@ -45,7 +45,19 @@ public class stackTqueueRemove {
             // Then push the new element 'val' onto addS.
             // This is the expensive O(n) part.
             // ---------------------------------------------------------------------
-            
+            if(addS.isEmpty()){
+                addS.push(val);
+            }else{
+                while(!addS.isEmpty()){
+                    removeS.push(addS.pop());
+                }
+                addS.push(val);
+                while (!removeS.isEmpty()) {
+                    addS.push(removeS.pop());
+                }
+                
+ 
+            }
         }
 
         /**
@@ -57,6 +69,8 @@ public class stackTqueueRemove {
             if (size() == 0) {
                 System.out.println("Queue underflow");
                 return -1; // Return -1 as per common practice for error indication
+            }else{
+                return addS.pop();
             }
 
             // ---------------------------------------------------------------------
@@ -66,7 +80,7 @@ public class stackTqueueRemove {
             // Then pop and return the element from removeS.
             // ---------------------------------------------------------------------
             
-            return -1; // Placeholder until implemented
+            // return -1; // Placeholder until implemented
         }
 
         /**
@@ -78,6 +92,8 @@ public class stackTqueueRemove {
             if (size() == 0) {
                  System.out.println("Queue underflow");
                  return -1;
+            }else{
+                return addS.peek();
             }
             // ---------------------------------------------------------------------
             // TODO: WRITE YOUR LOGIC FOR peek() HERE.
@@ -85,7 +101,7 @@ public class stackTqueueRemove {
             // Then peek and return the element from removeS.
             // ---------------------------------------------------------------------
             
-            return -1; // Placeholder until implemented
+            // return -1; // Placeholder until implemented
         }
     }
 

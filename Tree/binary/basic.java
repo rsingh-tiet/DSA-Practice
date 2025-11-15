@@ -1,4 +1,5 @@
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.Stack;
 
@@ -129,6 +130,7 @@ public class basic {
             }
         }
     }
+
     public static void levelTraversalLine(node node){
         Queue<node> main = new ArrayDeque<>();
         Queue<node> helQueue = new ArrayDeque<>();
@@ -151,6 +153,101 @@ public class basic {
             }
         }
     }
+    public  static void printKlevel(node node,int k){
+        if(node == null || k < 0){
+            return;
+        }
+        if(k == 0){
+            System.out.print(node.data +"\t");
+        }
+        printKlevel(node.left, k-1);
+        printKlevel(node.right, k-1);
+    }
+    public static void iterativeOrder(node node){
+       Stack<pair> stk = new Stack<>();
+       stk.push(new pair(node, 0));
+       String pre = "",in = "", post = "";
+       while (!stk.isEmpty()) {
+        pair top = stk.peek();
+        if (top.state == 0) {
+            pre += top.node.data+" ";
+            top.state++;
+            if(top.node.left != null){
+                stk.push(new pair(top.node.left, 0));
+            }
+        }else if (top.state == 1) {
+            in += top.node.data+" "; 
+            top.state++;
+            if(top.node.right != null){
+                stk.push(new pair(top.node.right, 0));
+            }
+        }else{
+            post += top.node.data+" ";
+            stk.pop();
+        }
+       }
+       System.out.println("pre:"+pre);
+       System.out.println("post:"+post);
+       System.out.println("in:"+in);
+    }
+    static ArrayList<node> nodeTorootPath;
+    public static boolean isThere(node node ,int d){
+        if(node == null){
+            return false;
+        }
+        if(node.data == d){
+            nodeTorootPath.add(node);
+            return true;
+        }
+        boolean leftChild = isThere(node.left, d);
+        if(leftChild){
+            nodeTorootPath.add(node);
+            return true;
+        }
+        boolean rightChild = isThere(node.right, d);
+        if(rightChild){
+            nodeTorootPath.add(node);
+            return true;
+        }
+        return false;
+    }
+    public static void printKfar(node node,int k,int data){
+        isThere(node, data);
+        for (int i = 0; i < nodeTorootPath.size(); i++) {
+            printKlevelModified(nodeTorootPath.get(i), k-i,i == 0? null:nodeTorootPath.get(i-1));
+        }
+    }
+    public static void printKlevelModified(node node , int k,node block){
+        if(node == null || node == block || k<0){
+            return;
+        }
+        if( k == 0){
+            System.out.print(node.data+"\t");
+        }
+        printKlevelModified(node.left, k-1, block);
+        printKlevelModified(node.right, k-1, block);
+    }
+    public static ArrayList<Integer> nodeTrootPath(node node,int d){
+        ArrayList<Integer> arr = new ArrayList<>();
+        if(node == null){
+            return new ArrayList<>();
+        }
+        if(node.data == d){
+            arr.add(node.data);
+            return arr;
+        }
+        ArrayList<Integer> leftChild = nodeTrootPath(node.left, d);
+        if(!leftChild.isEmpty()){
+            leftChild.add(node.data);
+            return leftChild;
+        }
+        ArrayList<Integer> rightChild = nodeTrootPath(node.right, d);
+        if(!rightChild.isEmpty()){
+            rightChild.add(node.data);
+            return rightChild;
+        }
+        return arr;
+    }
     public static void traversal(node node){
         if(node == null){
             return;
@@ -172,10 +269,27 @@ public class basic {
         Integer[] construct2 = {//skew
             10, 20, 30, 40, 50, null, null, null, null, null
         };
-        Integer[] construct = {//semi balance
+        Integer[] construct8 = {//semi balance
             1,
             2, 4, null, null, null,
             3, 5, 7, null, null, null, 6, null, null
+        };
+        Integer[] construct = {
+            1,
+            2,
+            4,
+                8, 16, null, null, 17, null, null,
+                9, 18, null, null, 19, null, null,
+            5,
+                10, 20, null, null, 21, null, null,
+                11, 22, null, null, 23, null, null,
+            3,
+            6,
+                12, 24, null, null, 25, null, null,
+                13, 26, null, null, 27, null, null,
+            7,
+                14, 28, null, null, 29, null, null,
+                15, 30, null, null, 31, null, null
         };
 
         node root = constructor(construct);
@@ -184,8 +298,20 @@ public class basic {
         System.out.println("size:"+size(root));
         System.out.println("ht:"+height(root));
         System.out.println("max:"+max(root));
-        traversal(root);
-        leveTraversal(root);
-        levelTraversalLine(root);
+        // traversal(root);
+        // leveTraversal(root);
+        // levelTraversalLine(root);
+        iterativeOrder(root);
+        nodeTorootPath = new ArrayList<>();
+        System.out.println(isThere(root, 62));
+        for (node print : nodeTorootPath) {
+            System.out.print(print.data+"\t");
+        }
+        System.out.print("\n"+nodeTrootPath(root, 62)+"\t");
+        System.out.println();
+        printKlevel(root, 2);
+        nodeTorootPath = new ArrayList<>();
+        System.out.println();
+        printKfar(root, 3, 24);
     }
 }

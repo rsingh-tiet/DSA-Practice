@@ -1,5 +1,7 @@
 import java.util.Scanner;
 
+import org.w3c.dom.Node;
+
 public class basic {
     public static class node {
         int data;
@@ -154,6 +156,17 @@ public class basic {
             left = head;
             helperFold(head, 0);
         }
+        boolean isCircular(node head) {
+            // Your code here
+            node curr = head.next;
+            while(curr != head){
+                if(curr == null){
+                    return false;
+                }
+                curr = curr.next;
+            }
+            return true;
+    }
         void addList( int val){
             node temp = new node();
                 temp.data = val;
@@ -197,6 +210,8 @@ public class basic {
         ln.isPalindrome();
         ln.foldList();
         ln.display();
+        boolean z = ln.isCircular(ln.head);
+        System.out.println(z);
         scn.close();
     }
 }

@@ -21,36 +21,70 @@ public class twoStackInArray {
             // TODO: Write your logic here
             if(top1 == top2 +1){
                 System.out.println("element will override the thing in other stack\nsize overflow");
+            }else{
+                top1++;
+                arr[top1] = x;
             }
         }
 
         // Push element x to stack2
         public void push2(int x) {
             // TODO: Write your logic here
+            if(top2 == top1 +1){
+                System.out.println("element will override the thing in other stack\nsize overflow");
+            }else{
+                top2--;
+                arr[top2] = x;
+            }
         }
 
         // Pop element from stack1
         public int pop1() {
             // TODO: Write your logic here
-            return -1;
+            if(top1 == -1){
+                System.out.println("stack underflow");
+                return -1;
+            }
+            int val = arr[top1];
+            top1--;
+            return val;
         }
 
         // Pop element from stack2
         public int pop2() {
             // TODO: Write your logic here
-            return -1;
+            if(top2 == size){
+                System.out.println("stack underflow");
+                return -1;
+            }
+            int val = arr[top2];
+            top2++;
+            return val;
+            
         }
 
         // Peek top of stack1
         public int top1() {
             // TODO: Write your logic here
-            return -1;
+            if(top1 == -1){
+                System.out.println("stack underflow");
+                return -1;
+            }
+            int val = arr[top1];
+            return val;
+            
         }
 
         // Peek top of stack2
         public int top2() {
             // TODO: Write your logic here
-            return -1;
+            if(top2 == size){
+                System.out.println("stack underflow");
+                return -1;
+            }
+            int val = arr[top2];
+            return val;
+            
         }
 
         // Size of stack1
