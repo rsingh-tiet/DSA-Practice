@@ -78,9 +78,45 @@ public class targetPair {
             }
         }
     }
-    public static void reverseIn(node node){
-        Stack<pair> stk = new Stack<>();
-        stk.push(new pair(node,0));
+    public static node reverseIn(Stack<pair> stk){
+        while (!stk.isEmpty()) {
+            pair top = stk.peek();
+            if(top.state == 0){//pre
+                if(top.node.right != null){
+                    stk.push(new pair(top.node.right,0));
+                }
+                top.state++;
+            }else if(top.state == 1){//in
+                if(top.node.left != null){
+                    stk.push(new pair(top.node.left,0));
+                }
+                top.state++;
+            }else{//post
+                stk.pop();
+                return top.node;
+            }
+        }
+        return null;
+    }
+    public static node In(Stack<pair> stk){
+        while (!stk.isEmpty()) {
+            pair top = stk.peek();
+            if(top.state == 0){//pre
+                if(top.node.left != null){
+                    stk.push(new pair(top.node.left,0));
+                }
+                top.state++;
+            }else if(top.state == 1){//in
+                if(top.node.right != null){
+                    stk.push(new pair(top.node.right,0));
+                }
+                top.state++;
+            }else{//post
+                stk.pop();
+                return top.node;
+            }
+        }
+        return null;
     }
     public static void targetBest(node node,int target){
         Stack<pair> leftStk = new Stack<>();
@@ -90,8 +126,16 @@ public class targetPair {
 
         node left = In(leftStk);
         node right = reverseIn(rightStk);
-        while (left.data < right.data) {
-            
+        while (left != null && right != null && left.data < right.data) {
+            if(left.data+right.data < target){
+                left = In(leftStk);
+            }else if(left.data + right.data > target){
+                right = reverseIn(rightStk);
+            }else if(left.data + right.data == target){
+                System.out.println(left.data+" "+right.data);
+                left = In(leftStk);
+                right = reverseIn(rightStk);
+            }
         }
     }
     public static void main(String[] args) {
@@ -103,5 +147,7 @@ public class targetPair {
         array = new ArrayList<>();
         inorder(root);
         target2(array, 12);
+        System.out.println("**********");
+        targetBest(root, 12);
     }
 }
