@@ -13,7 +13,8 @@ public class MergeKSortedArrayList {
             this.elementIndex = elementIndex;
         }
     }
-
+// we can have comparable class that is implemented on pair 
+// then we can have comparable
     public static ArrayList<Integer> mergeKLists(ArrayList<ArrayList<Integer>> lists) {
 
         ArrayList<Integer> result = new ArrayList<>();
@@ -46,6 +47,7 @@ public class MergeKSortedArrayList {
             }
         }
 
+        
         return result;
     }
 
@@ -53,7 +55,7 @@ public class MergeKSortedArrayList {
     public static void main(String[] args) {
         ArrayList<ArrayList<Integer>> lists = new ArrayList<>();
 
-        lists.add(new ArrayList<>(Arrays.asList(1, 4, 7)));
+        lists.add(new ArrayList<>(Arrays.asList(1, 4, 7, 11)));
         lists.add(new ArrayList<>(Arrays.asList(2, 5, 8)));
         lists.add(new ArrayList<>(Arrays.asList(3, 6, 9)));
 
